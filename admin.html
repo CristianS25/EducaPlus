@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - EducaPlus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><span>E+</span></div>
+        <span class="logo-text">EducaPlus</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="admin.html" class="active">Admin</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ADMIN CONTENT -->
+  <div class="admin">
+    <div class="admin-inner">
+
+      <!-- Header -->
+      <div class="admin-header-card">
+        <div class="admin-header-row">
+          <div>
+            <h1>Administrar Cursos</h1>
+            <p>Gestiona el catalogo completo de cursos de EducaPlus</p>
+          </div>
+          <button class="btn-new" onclick="openCourseDialog()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            Nuevo Curso
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="adminStats"></div>
+
+      <!-- Table -->
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Curso</th>
+                <th>Categoria</th>
+                <th>Nivel</th>
+                <th>Duracion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state" style="display:none">
+          <p>No hay cursos disponibles</p>
+          <button class="btn-new" onclick="openCourseDialog()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            Crear primer curso
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create/Edit Modal -->
+  <div class="modal-overlay" id="courseModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Crear Nuevo Curso</h2>
+        <p id="modalDescription">Completa la informacion del nuevo curso</p>
+      </div>
+
+      <form id="courseForm" onsubmit="handleSaveCourse(event)">
+        <input type="hidden" id="editingId" value="">
+
+        <div class="form-group">
+          <label for="courseTitle">Titulo del Curso *</label>
+          <input type="text" id="courseTitle" class="form-input" placeholder="Ej: Desarrollo Web Full Stack" required>
+        </div>
+
+        <div class="form-group">
+          <label for="courseDescription">Descripcion *</label>
+          <textarea id="courseDescription" class="form-input" placeholder="Describe el contenido y objetivos del curso" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="courseCategory">Categoria *</label>
+            <select id="courseCategory" class="form-input" required>
+              <option value="Desarrollo Web">Desarrollo Web</option>
+              <option value="Diseno">Diseno</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Datos y Analisis">Datos y Analisis</option>
+              <option value="Negocios">Negocios</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="courseLevel">Nivel *</label>
+            <select id="courseLevel" class="form-input" required>
+              <option value="Basico">Basico</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="courseDuration">Duracion *</label>
+          <input type="text" id="courseDuration" class="form-input" placeholder="Ej: 12 semanas" required>
+        </div>
+
+        <div class="form-group">
+          <label for="courseImage">URL de la Imagen</label>
+          <input type="text" id="courseImage" class="form-input" placeholder="https://ejemplo.com/imagen.jpg" oninput="updateImagePreview()">
+          <div class="form-preview" id="imagePreview"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeCourseDialog()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            Cancelar
+          </button>
+          <button type="submit" class="btn-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+            <span id="saveButtonText">Crear Curso</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal alert-modal">
+      <div class="modal-header">
+        <h2>Estas seguro?</h2>
+        <p>Esta accion no se puede deshacer. El curso sera eliminado permanentemente del catalogo.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeDeleteDialog()">Cancelar</button>
+        <button class="btn-delete-confirm" onclick="confirmDeleteCourse()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><span>E+</span></div>
+            <span class="logo-text" style="color:white">EducaPlus</span>
+          </div>
+          <p>La mejor plataforma para aprender nuevas habilidades en linea.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <span>info@educaplus.com</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span>+57 123 456 7890</span>
+          </div>
+        </div>
+        <div>
+          <h4>Siguenos</h4>
+          <div class="social-links">
+            <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+            <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a href="#" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 EducaPlus. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    renderAdminPage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EducaPlus - Aprende nuevas habilidades en linea</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><span>E+</span></div>
+        <span class="logo-text">EducaPlus</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav class="nav">
+        <a href="index.html" class="active">Inicio</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="admin.html">Admin</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Aprende con los mejores</span>
+        </div>
+        <h1>Aprende nuevas habilidades en linea</h1>
+        <p class="hero-description">
+          Descubre miles de cursos en linea impartidos por expertos de la industria.
+          Aprende a tu propio ritmo y alcanza tus objetivos profesionales.
+        </p>
+        <div class="hero-buttons">
+          <a href="cursos.html" class="btn-primary">Explorar cursos</a>
+          <a href="#contacto" class="btn-secondary">Contactanos</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="hero-image-container">
+          <img src="https://images.unsplash.com/photo-1588912914078-2fe5224fd8b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxvbmxpbmUlMjBsZWFybmluZyUyMGVkdWNhdGlvbiUyMGxhcHRvcHxlbnwxfHx8fDE3NzQzMjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Online learning">
+        </div>
+        <div class="hero-blur-1"></div>
+        <div class="hero-blur-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED COURSES -->
+  <section class="featured">
+    <div class="featured-inner">
+      <div class="section-header">
+        <h2>Cursos destacados</h2>
+        <p>Descubre nuestros cursos mas populares y comienza tu viaje de aprendizaje hoy</p>
+      </div>
+      <div class="featured-grid">
+
+        <div class="course-card">
+          <div class="course-card-image">
+            <img src="https://images.unsplash.com/photo-1588912914078-2fe5224fd8b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxvbmxpbmUlMjBsZWFybmluZyUyMGVkdWNhdGlvbiUyMGxhcHRvcHxlbnwxfHx8fDE3NzQzMjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Desarrollo Web Full Stack">
+          </div>
+          <div class="course-card-body">
+            <h3>Desarrollo Web Full Stack</h3>
+            <p>Aprende a crear aplicaciones web modernas con React, Node.js y bases de datos.</p>
+            <a href="curso-detalle.html?id=1" class="btn-card">Ver mas</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-image">
+            <img src="https://images.unsplash.com/photo-1758612214917-81d7956c09de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxvbmxpbmUlMjBsZWFybmluZyUyMGVkdWNhdGlvbiUyMGxhcHRvcHxlbnwxfHx8fDE3NzQzMjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Diseno UX/UI Profesional">
+          </div>
+          <div class="course-card-body">
+            <h3>Diseno UX/UI Profesional</h3>
+            <p>Domina los principios del diseno de experiencia de usuario y crea interfaces atractivas.</p>
+            <a href="curso-detalle.html?id=2" class="btn-card">Ver mas</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-image">
+            <img src="https://images.unsplash.com/photo-1758687126499-9ff30d1c5762?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxvbmxpbmUlMjBsZWFybmluZyUyMGVkdWNhdGlvbiUyMGxhcHRvcHxlbnwxfHx8fDE3NzQzMjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Marketing Digital">
+          </div>
+          <div class="course-card-body">
+            <h3>Marketing Digital</h3>
+            <p>Estrategias efectivas para promover tu negocio en redes sociales y motores de busqueda.</p>
+            <a href="curso-detalle.html?id=3" class="btn-card">Ver mas</a>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-card-image">
+            <img src="https://images.unsplash.com/photo-1762330910399-95caa55acf04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZyUyMGVkdWNhdGlvbiUyMGxhcHRvcHxlbnwxfHx8fDE3NzQzMjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Ciencia de Datos con Python">
+          </div>
+          <div class="course-card-body">
+            <h3>Ciencia de Datos con Python</h3>
+            <p>Analiza datos, crea visualizaciones y construye modelos predictivos con Python.</p>
+            <a href="curso-detalle.html?id=4" class="btn-card">Ver mas</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits">
+    <div class="benefits-inner">
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Aprendizaje flexible</h3>
+          <p>Estudia a tu propio ritmo, en cualquier momento y desde cualquier lugar.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Profesores expertos</h3>
+          <p>Aprende de profesionales con anos de experiencia en la industria.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3>Certificacion</h3>
+          <p>Obten certificados reconocidos al completar tus cursos con exito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-blur-1"></div>
+    <div class="cta-blur-2"></div>
+    <div class="cta-inner">
+      <h2>Empieza hoy tu aprendizaje</h2>
+      <p>Unete a miles de estudiantes que ya estan mejorando sus habilidades y alcanzando sus metas</p>
+      <a href="cursos.html" class="btn-cta">Explorar cursos</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto" class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><span>E+</span></div>
+            <span class="logo-text" style="color:white">EducaPlus</span>
+          </div>
+          <p>La mejor plataforma para aprender nuevas habilidades en linea.</p>
+        </div>
+
+        <div>
+          <h4>Contacto</h4>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <span>info@educaplus.com</span>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span>+57 123 456 7890</span>
+          </div>
+        </div>
+
+        <div>
+          <h4>Siguenos</h4>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 EducaPlus. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
