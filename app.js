@@ -276,6 +276,7 @@ function renderCourseDetail() {
               '<div class="detail-price-body">' +
                 '<div class="price-display"><p>Precio del curso</p><p>' + course.price + '</p></div>' +
                 '<button class="btn-enroll">Inscribirse ahora</button>' +
+                '<button class="btn-enroll" onclick="agregarFavorito(' + course.id + ')">❤️ Agregar a favoritos</button>' +
                 '<p class="guarantee-text">Garantia de devolucion de 30 dias</p>' +
               '</div>' +
             '</div>' +
@@ -496,4 +497,24 @@ function confirmDeleteCourse() {
     renderTable();
   }
   closeDeleteDialog();
+}
+// ===== FAVORITOS =====
+
+function agregarFavorito(id){
+
+  var favoritos = localStorage.getItem("favoritos");
+
+  if(favoritos){
+    favoritos = JSON.parse(favoritos);
+  } else {
+    favoritos = [];
+  }
+
+  if(!favoritos.includes(id)){
+    favoritos.push(id);
+  }
+
+  localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
+  alert("Curso agregado a favoritos");
 }
