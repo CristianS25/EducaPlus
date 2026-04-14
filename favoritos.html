@@ -26,7 +26,7 @@ var html = "";
 
 favoritos.forEach(function(id){
 
-var course = cursos[id];
+var course = cursos.find(c => c.id == id);
 
 if(course){
 

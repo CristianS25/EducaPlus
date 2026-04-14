@@ -167,7 +167,7 @@ function renderCourseDetail() {
 
   const cursos = JSON.parse(localStorage.getItem("cursos")) || [];
 
-  const course = cursos[id];
+const course = cursos.find(c => c.id == id);
 
   const container = document.getElementById("courseDetailContent");
 
@@ -184,7 +184,7 @@ function renderCourseDetail() {
       <p><strong>Categoria:</strong> ${course.categoria}</p>
       <p><strong>Nivel:</strong> ${course.nivel}</p>
       <p><strong>Duracion:</strong> ${course.duracion}</p>
-      <button onclick="agregarFavorito(${id})">Agregar a favoritos</button>
+      <button onclick="agregarFavorito(${course.id})">
     </div>
   `;
 }
