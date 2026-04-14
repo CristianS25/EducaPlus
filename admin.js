@@ -28,14 +28,15 @@ function handleSaveCourse(event) {
 
   let cursos = JSON.parse(localStorage.getItem("cursos")) || [];
 
-  let nuevoCurso = {
-    nombre,
-    descripcion,
-    categoria,
-    nivel,
-    duracion,
-    imagen
-  };
+let nuevoCurso = {
+  id: Date.now(), 
+  nombre,
+  descripcion,
+  categoria,
+  nivel,
+  duracion,
+  imagen
+};
 
   cursos.push(nuevoCurso);
 
