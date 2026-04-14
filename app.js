@@ -161,3 +161,30 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener("submit", handleSaveCourse);
   }
 });
+function renderCourseDetail() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  const cursos = JSON.parse(localStorage.getItem("cursos")) || [];
+
+  const course = cursos[id];
+
+  const container = document.getElementById("courseDetailContent");
+
+  if (!course) {
+    container.innerHTML = "<p>Curso no encontrado</p>";
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="course-detail">
+      <h1>${course.nombre}</h1>
+      <img src="${course.imagen}" style="max-width:300px;">
+      <p>${course.descripcion}</p>
+      <p><strong>Categoria:</strong> ${course.categoria}</p>
+      <p><strong>Nivel:</strong> ${course.nivel}</p>
+      <p><strong>Duracion:</strong> ${course.duracion}</p>
+      <button onclick="agregarFavorito(${id})">Agregar a favoritos</button>
+    </div>
+  `;
+}
