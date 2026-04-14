@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mis Favoritos</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<h1>Mis cursos favoritos</h1>
+
+<div id="favoritosGrid"></div>
+
+<script src="app.js"></script>
+
+<script>
+
+var favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+var container = document.getElementById("favoritosGrid");
+
+var html = "";
+
+favoritos.forEach(function(id){
+
+var course = allCourses.find(function(c){
+return c.id === id;
+});
+
+if(course){
+
+html +=
+'<div class="course-card">'+
+'<img src="'+course.image+'">'+
+'<h3>'+course.title+'</h3>'+
+'<p>'+course.description+'</p>'+
+'</div>';
+
+}
+
+});
+
+container.innerHTML = html;
+
+</script>
+
+</body>
+</html>
