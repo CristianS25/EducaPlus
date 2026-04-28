@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="header-inner">
+    <a routerLink="/" class="logo">
+      <div class="logo-icon"><span>E+</span></div>
+      <span class="logo-text">EducaPlus</span>
+    </a>
+    <button class="nav-toggle" (click)="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+    <nav class="nav" [class.open]="navOpen">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="navOpen=false">Inicio</a>
+      <a routerLink="/cursos" routerLinkActive="active" (click)="navOpen=false">Cursos</a>
+      <a routerLink="/favoritos" routerLinkActive="active" (click)="navOpen=false">Favoritos</a>
+      <a routerLink="/admin" routerLinkActive="active" (click)="navOpen=false">Admin</a>
+      <a routerLink="/" fragment="contacto" (click)="navOpen=false">Contacto</a>
+    </nav>
+  </div>
+</header>

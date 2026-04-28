@@ -1,0 +1,34 @@
+<app-header />
+
+<div class="courses-header">
+  <div class="courses-header-inner">
+    <div class="courses-header-text">
+      <h1>Mis cursos favoritos</h1>
+      <p>Los cursos que has guardado para aprender</p>
+    </div>
+  </div>
+</div>
+
+<section class="courses-section">
+  <div class="courses-section-inner">
+    @if (cursosFavoritos.length === 0) {
+      <div style="text-align:center;padding:4rem 1.5rem;color:#6b7280">
+        <p style="font-size:1.125rem;margin-bottom:1rem">No tienes cursos favoritos aun.</p>
+        <a routerLink="/cursos" class="btn-primary" style="display:inline-block">Explorar cursos</a>
+      </div>
+    } @else {
+      <p class="courses-count">Tienes <strong>{{ cursosFavoritos.length }}</strong> cursos favoritos</p>
+      <div class="courses-grid">
+        @for (curso of cursosFavoritos; track curso.id) {
+          <app-course-card
+            [curso]="curso"
+            [showFavoriteButton]="true"
+            (favoriteToggled)="quitarFavorito($event)"
+          />
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<app-footer />

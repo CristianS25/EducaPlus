@@ -1,0 +1,19 @@
+<div class="course-card">
+  <div class="course-card-image">
+    <img [src]="curso.imagen || DEFAULT_IMAGE" [alt]="curso.nombre">
+    <span class="course-card-level" [ngClass]="getLevelClass()">{{ curso.nivel }}</span>
+  </div>
+  <div class="course-card-body">
+    <div class="course-card-meta">
+      <span class="course-card-category">{{ curso.categoria }}</span>
+      <span class="course-card-duration">{{ curso.duracion }}</span>
+    </div>
+    <h3>{{ curso.nombre }}</h3>
+    <p>{{ curso.descripcion }}</p>
+    @if (showFavoriteButton) {
+      <button class="btn-card" (click)="favoriteToggled.emit(curso.id)">Agregar a favoritos</button>
+    } @else {
+      <a [routerLink]="['/cursos', curso.id]" class="btn-card">Ver más</a>
+    }
+  </div>
+</div>

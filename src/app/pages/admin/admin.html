@@ -1,0 +1,217 @@
+<app-header />
+
+<div class="admin">
+  <div class="admin-inner">
+
+    <!-- Header -->
+    <div class="admin-header-card">
+      <div class="admin-header-row">
+        <div>
+          <h1>Administrar Cursos</h1>
+          <p>Gestiona el catalogo completo de cursos de EducaPlus</p>
+        </div>
+        <button class="btn-new" (click)="openCreateModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="M12 5v14"/>
+          </svg>
+          Nuevo Curso
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div>
+            <p>Total de Cursos</p>
+            <p class="stat-number">{{ totalCursos }}</p>
+          </div>
+          <div class="stat-icon blue">📚</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div>
+            <p>Publicados</p>
+            <p class="stat-number">{{ totalCursos }}</p>
+          </div>
+          <div class="stat-icon green">✅</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-inner">
+          <div>
+            <p>Categorias</p>
+            <p class="stat-number">5</p>
+          </div>
+          <div class="stat-icon purple">🏷️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Curso</th>
+              <th>Categoria</th>
+              <th>Nivel</th>
+              <th>Duracion</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (curso of cursos; track curso.id) {
+              <tr>
+                <td>
+                  <div class="table-course-info">
+                    <img [src]="curso.imagen || DEFAULT_IMAGE" [alt]="curso.nombre">
+                    <div class="info-text">
+                      <p>{{ curso.nombre }}</p>
+                      <p>{{ curso.descripcion }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ curso.categoria }}</td>
+                <td><span [ngClass]="getLevelBadgeClass(curso.nivel)">{{ curso.nivel }}</span></td>
+                <td>{{ curso.duracion }}</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn-icon edit" (click)="openEditModal(curso)" title="Editar">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                      </svg>
+                    </button>
+                    <button class="btn-icon delete" (click)="openDeleteModal(curso.id)" title="Eliminar">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (cursos.length === 0) {
+        <div class="empty-state">
+          <p>No hay cursos disponibles</p>
+          <button class="btn-new" (click)="openCreateModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/><path d="M12 5v14"/>
+            </svg>
+            Crear primer curso
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Create/Edit Modal -->
+@if (modalVisible) {
+  <div class="modal-overlay active" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ editingId !== null ? 'Editar Curso' : 'Crear Nuevo Curso' }}</h2>
+        <p>{{ editingId !== null ? 'Modifica la informacion del curso' : 'Completa la informacion del nuevo curso' }}</p>
+      </div>
+
+      <form [formGroup]="courseForm" (ngSubmit)="saveCourse()">
+        <div class="form-group">
+          <label>Titulo del Curso *</label>
+          <input type="text" class="form-input" formControlName="nombre" placeholder="Ej: Desarrollo Web Full Stack">
+          @if (courseForm.get('nombre')?.invalid && courseForm.get('nombre')?.touched) {
+            <small style="color:#dc2626">El titulo es obligatorio</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Descripcion *</label>
+          <textarea class="form-input" formControlName="descripcion" placeholder="Describe el contenido y objetivos del curso"></textarea>
+          @if (courseForm.get('descripcion')?.invalid && courseForm.get('descripcion')?.touched) {
+            <small style="color:#dc2626">La descripcion es obligatoria</small>
+          }
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Categoria *</label>
+            <select class="form-input" formControlName="categoria">
+              <option value="Desarrollo Web">Desarrollo Web</option>
+              <option value="Diseno">Diseno</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Datos y Analisis">Datos y Analisis</option>
+              <option value="Negocios">Negocios</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nivel *</label>
+            <select class="form-input" formControlName="nivel">
+              <option value="Basico">Basico</option>
+              <option value="Intermedio">Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Duracion *</label>
+          <input type="text" class="form-input" formControlName="duracion" placeholder="Ej: 12 semanas">
+          @if (courseForm.get('duracion')?.invalid && courseForm.get('duracion')?.touched) {
+            <small style="color:#dc2626">La duracion es obligatoria</small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>URL de la Imagen</label>
+          <input type="text" class="form-input" formControlName="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+          @if (courseForm.get('imagen')?.value) {
+            <div class="form-preview">
+              <img [src]="courseForm.get('imagen')?.value" alt="Preview">
+            </div>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="closeModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+            Cancelar
+          </button>
+          <button type="submit" class="btn-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+              <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/>
+              <path d="M7 3v4a1 1 0 0 0 1 1h7"/>
+            </svg>
+            {{ editingId !== null ? 'Guardar cambios' : 'Crear Curso' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (deleteModalVisible) {
+  <div class="modal-overlay active" (click)="closeDeleteModal()">
+    <div class="modal alert-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Estas seguro?</h2>
+        <p>Esta accion no se puede deshacer. El curso sera eliminado permanentemente del catalogo.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeDeleteModal()">Cancelar</button>
+        <button class="btn-delete-confirm" (click)="confirmDelete()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}
+
+<app-footer />

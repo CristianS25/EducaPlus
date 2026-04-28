@@ -1,0 +1,101 @@
+<app-header />
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span>Aprende con los mejores</span>
+      </div>
+      <h1>Aprende nuevas habilidades en linea</h1>
+      <p class="hero-description">
+        Descubre miles de cursos en linea impartidos por expertos de la industria.
+        Aprende a tu propio ritmo y alcanza tus objetivos profesionales.
+      </p>
+      <div class="hero-buttons">
+        <a routerLink="/cursos" class="btn-primary">Explorar cursos</a>
+        <a routerLink="/" fragment="contacto" class="btn-secondary">Contactanos</a>
+      </div>
+    </div>
+    <div class="hero-image-wrapper">
+      <div class="hero-image-container">
+        <img src="https://images.unsplash.com/photo-1588912914078-2fe5224fd8b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Online learning">
+      </div>
+      <div class="hero-blur-1"></div>
+      <div class="hero-blur-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COURSES -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="section-header">
+      <h2>Cursos destacados</h2>
+      <p>Descubre nuestros cursos mas populares y comienza tu viaje de aprendizaje hoy</p>
+    </div>
+    <div class="featured-grid">
+      @if (cursos.length === 0) {
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:#6b7280">
+          <p>No hay cursos disponibles. <a routerLink="/admin" style="color:#2563eb">Agrega cursos desde el panel admin</a>.</p>
+        </div>
+      }
+      @for (curso of cursos; track curso.id) {
+        <app-course-card [curso]="curso" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="benefits-inner">
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Aprendizaje flexible</h3>
+        <p>Estudia a tu propio ritmo, en cualquier momento y desde cualquier lugar.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Profesores expertos</h3>
+        <p>Aprende de profesionales con anos de experiencia en la industria.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="6"/>
+            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+          </svg>
+        </div>
+        <h3>Certificacion</h3>
+        <p>Obten certificados reconocidos al completar tus cursos con exito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-blur-1"></div>
+  <div class="cta-blur-2"></div>
+  <div class="cta-inner">
+    <h2>Empieza hoy tu aprendizaje</h2>
+    <p>Unete a miles de estudiantes que ya estan mejorando sus habilidades y alcanzando sus metas</p>
+    <a routerLink="/cursos" class="btn-cta">Explorar cursos</a>
+  </div>
+</section>
+
+<app-footer />

@@ -1,0 +1,125 @@
+<app-header />
+
+@if (curso) {
+  <!-- DETAIL HERO -->
+  <div class="detail-hero">
+    <div class="detail-hero-inner">
+      <a routerLink="/cursos" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+        Volver a cursos
+      </a>
+      <div class="detail-hero-grid">
+        <div class="detail-info">
+          <span class="course-card-level" [ngClass]="getLevelClass()" style="display:inline-block;margin-bottom:1rem">{{ curso.nivel }}</span>
+          <h1>{{ curso.nombre }}</h1>
+          <p>{{ curso.descripcion }}</p>
+          <div class="detail-meta">
+            <div class="detail-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/>
+              </svg>
+              <span>{{ curso.categoria }}</span>
+            </div>
+            <div class="detail-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>{{ curso.duracion }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="detail-price-card">
+          <img [src]="curso.imagen || DEFAULT_IMAGE" [alt]="curso.nombre">
+          <div class="detail-price-body">
+            <div class="price-display">
+              <p>Acceso completo</p>
+              <p>Gratis</p>
+            </div>
+            <button class="btn-enroll" (click)="toggleFavorito()">
+              {{ esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos' }}
+            </button>
+            <p class="guarantee-text">Acceso de por vida al contenido</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL CONTENT -->
+  <div class="detail-main">
+    <div class="detail-layout">
+      <div class="detail-content">
+        <div class="detail-card">
+          <h2>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Descripcion del curso
+          </h2>
+          <p>{{ curso.descripcion }}</p>
+        </div>
+        <div class="detail-card">
+          <h2>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
+            </svg>
+            Lo que aprenderas
+          </h2>
+          <div class="learn-grid">
+            <div class="learn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+              <span>Fundamentos de {{ curso.categoria }}</span>
+            </div>
+            <div class="learn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+              <span>Proyectos practicos reales</span>
+            </div>
+            <div class="learn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+              <span>Mejores practicas de la industria</span>
+            </div>
+            <div class="learn-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+              <span>Certificado de finalizacion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-sidebar">
+        <div class="sidebar-card">
+          <h3>Este curso incluye</h3>
+          <div class="sidebar-benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+            <span>Duracion: {{ curso.duracion }}</span>
+          </div>
+          <div class="sidebar-benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+            <span>Nivel: {{ curso.nivel }}</span>
+          </div>
+          <div class="sidebar-benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+            <span>Acceso de por vida</span>
+          </div>
+          <div class="sidebar-benefit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/></svg>
+            <span>Certificado al completar</span>
+          </div>
+          <button class="btn-enroll" (click)="toggleFavorito()">
+            {{ esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="not-found">
+    <div>
+      <h1>Curso no encontrado</h1>
+      <p><a routerLink="/cursos">Volver al catalogo de cursos</a></p>
+    </div>
+  </div>
+}
+
+<app-footer />

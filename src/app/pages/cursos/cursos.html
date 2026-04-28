@@ -1,0 +1,60 @@
+<app-header />
+
+<!-- COURSES HEADER -->
+<div class="courses-header">
+  <div class="courses-header-inner">
+    <div class="courses-header-text">
+      <h1>Explora nuestros cursos</h1>
+      <p>Descubre mas de 500 cursos disenados para impulsar tu carrera profesional</p>
+    </div>
+    <div class="search-area">
+      <div class="search-input-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Buscar cursos por tema, tecnologia o habilidad..."
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="filtrar()"
+        >
+      </div>
+      <div class="filter-row">
+        <select class="filter-select" [(ngModel)]="categoriaFiltro" (ngModelChange)="filtrar()">
+          <option value="">Todas las categorias</option>
+          <option value="Desarrollo Web">Desarrollo Web</option>
+          <option value="Diseno">Diseno</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Datos y Analisis">Datos y Analisis</option>
+          <option value="Negocios">Negocios</option>
+        </select>
+        <select class="filter-select" [(ngModel)]="nivelFiltro" (ngModelChange)="filtrar()">
+          <option value="">Todos los niveles</option>
+          <option value="Basico">Basico</option>
+          <option value="Intermedio">Intermedio</option>
+          <option value="Avanzado">Avanzado</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COURSES GRID -->
+<section class="courses-section">
+  <div class="courses-section-inner">
+    <p class="courses-count">Mostrando <strong>{{ filteredCursos.length }}</strong> cursos</p>
+    <div class="courses-grid">
+      @if (filteredCursos.length === 0) {
+        <div style="grid-column:1/-1;text-align:center;padding:3rem;color:#6b7280">
+          <p>No se encontraron cursos con esos criterios.</p>
+        </div>
+      }
+      @for (curso of filteredCursos; track curso.id) {
+        <app-course-card [curso]="curso" />
+      }
+    </div>
+  </div>
+</section>
+
+<app-footer />
